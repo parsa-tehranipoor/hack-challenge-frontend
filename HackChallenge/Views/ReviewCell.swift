@@ -64,7 +64,7 @@ struct ReviewCell: View {
             }
         }
     }
-    
+
     func getEatery() {
         NetworkManager.shared.fetchEatery(withID: review.eateryID) { fetchedEatery in
             DispatchQueue.main.async {
@@ -76,7 +76,7 @@ struct ReviewCell: View {
     func getNumHalfStars() -> Int {
         var numHalfStars = 0
         for index in 1...10 {
-            if index <= review.rating * 2 {
+            if Double(index) <= review.rating * 2 {
                 numHalfStars += 1
             }
         }

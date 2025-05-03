@@ -85,7 +85,7 @@ struct ReviewPage: View {
     private func getNumHalfStars() -> Int {
         var numHalfStars = 0
         for index in 1...10 {
-            if index <= review.rating * 2 {
+            if Double(index) <= review.rating * 2 {
                 numHalfStars += 1
             }
         }

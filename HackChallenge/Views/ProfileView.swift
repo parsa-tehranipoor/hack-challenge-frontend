@@ -17,7 +17,7 @@ struct ProfileView: View {
                     .scaledToFit()
                     .frame(width: 240, height: 240)
                     .padding(.top, 28)
-
+                
                 Spacer()
                 
                 HStack {

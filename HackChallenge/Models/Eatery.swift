@@ -7,7 +7,7 @@
 import Foundation
 
 struct Eatery: Identifiable, Codable {
-    let id: UUID
+    let id: Int
     let name: String
     let description: String
     let location: String

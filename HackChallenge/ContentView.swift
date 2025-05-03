@@ -40,10 +40,7 @@ struct ContentView: View {
     }
     
     func getUser() {
-        guard let id = UUID(uuidString: "D3F72C27-1B59-4C3E-A239-294BF9576B41") else {
-            print("Invalid UUID format")
-            return
-        }
+        let id = 1
 
         NetworkManager.shared.fetchUser(withID: id) { fetchedUser in
             DispatchQueue.main.async {

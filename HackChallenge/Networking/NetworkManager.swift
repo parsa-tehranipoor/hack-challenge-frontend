@@ -14,9 +14,9 @@ class NetworkManager {
     private let decoder = JSONDecoder()
     private init() {}
         
-    func fetchUser(withID userID: UUID, completion: @escaping (User?) -> Void) {
-        let url = "\("https://yourapi.com/api/users")/\(userID.uuidString)"
-        
+    func fetchUser(withID userID: Int, completion: @escaping (User?) -> Void) {
+        let url = "http://34.21.78.116/api/users/\(userID)"
+
         AF.request(url, method: .get)
             .validate()
             .responseDecodable(of: User.self, decoder: decoder) { response in
@@ -31,9 +31,9 @@ class NetworkManager {
     }
     
     
-    func fetchEatery(withID eateryID: UUID, completion: @escaping (Eatery?) -> Void) {
-        let url = "\("https://yourapi.com/api/eateries")/\(eateryID.uuidString)"
-        
+    func fetchEatery(withID eateryID: Int, completion: @escaping (Eatery?) -> Void) {
+        let url = "http://34.21.78.116/api/eateries/\(eateryID)"
+
         AF.request(url, method: .get)
             .validate()
             .responseDecodable(of: Eatery.self, decoder: decoder) { response in
@@ -45,5 +45,23 @@ class NetworkManager {
                     completion(nil)
                 }
             }
+    }
+    
+    func fetchUserFollowerReviews(withID userID: Int, completion: @escaping ([Review]) -> Void) {
+        let url = "http://34.21.78.116/api/users/\(userID)/following_reviews/"
+        
+        AF.request(url, method: .get)
+            .validate()
+            .responseDecodable(of: ReviewListResponse.self, decoder: decoder) { response in
+                print(response)
+                switch response.result {
+                case .success(let reviews):
+                    completion(reviews.reviews)
+                case .failure(let error):
+                    print("Error in NetworkManager.fetchRecipes: \(error.localizedDescription)")
+                    completion([])
+                }
+            }
+
     }
 }

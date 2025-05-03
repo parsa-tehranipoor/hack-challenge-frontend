@@ -7,7 +7,7 @@
 import Foundation
 
 struct User: Identifiable, Codable {
-    let id: UUID
+    let id: Int
     let name: String
     let username: String
     let bio: String
@@ -15,6 +15,6 @@ struct User: Identifiable, Codable {
     let ratingsCount: Int
     let averageRating: Float
     let ranking: Int
-    var followerIDs: [UUID]    // users who follow this user
-    var followingIDs: [UUID]
+    var followerIDs: [Int]    // users who follow this user
+    var followingIDs: [Int]
 }

@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    let followersRecentReviews: [Review] = Review.dummyData
+    @State var followersRecentReviews: [Review] = []
     
     var body: some View {
         VStack {
@@ -40,6 +40,20 @@ struct HomeView: View {
                 }
             }
             .background(Color(hex: 0xD8D8D8))
+        }
+        .onAppear {
+            getFollowersReviews()
+        }
+    }
+    
+    
+    func getFollowersReviews() {
+        let id = 1
+        NetworkManager.shared.fetchUserFollowerReviews(withID: id) { fetchedList in
+            DispatchQueue.main.async {
+                print("Fetched from server: \(fetchedList)")
+                self.followersRecentReviews = fetchedList
+            }
         }
     }
 }
